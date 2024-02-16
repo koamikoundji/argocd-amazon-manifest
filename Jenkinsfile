@@ -1,7 +1,8 @@
+
 node {
     def app
     
-    env.IMAGE = 'koami-amazon'
+    env.IMAGE = 'koami/amazon'
 
     stage('Clone repository') {
              git branch: 'main', url: 'https://github.com/koamikoundji/argocd-amazon-manifest.git'  
@@ -12,7 +13,7 @@ node {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withCredentials([usernamePassword(credentialsId: 'koami-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         //script {def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')}
-                        //script  {def IMAGE='koami-amazon'}
+                        //script  {def IMAGE='koami/amazon'}
                         sh "git config user.email koundjikoami1@gmail.com"
                         sh "git config user.name koamikoundji"
                         //sh "git switch master"
